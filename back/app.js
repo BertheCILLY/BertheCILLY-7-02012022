@@ -13,18 +13,23 @@ const path = require("path");
 // Lancement de express
 const app = express();
 
-// Déclaration des routes
 
-const userRoutes = require('./routes/user');
+// Importation des  routes
+
+//const commentRoutes = require('./routes/comment'); 
+
+//const userRoutes = require ('./routes/user');
+
+
 
 // Connexions à mysql
 
 
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
-  host     : 'localhost.8080',
-  user     : 'BertheCILLY',
-  password : 'linux'
+  host     : 'localhost',
+  user     : 'root',
+  password : ''
 });
  
 connection.connect(function(err) {
@@ -43,9 +48,9 @@ var connection = mysql.createConnection(...);
 connection.query('SELECT 1', function (error, results, fields) {
   if (error) throw error;
   // connected!
-});*/
+});/*
 
-// intercepte tous les requetes qui ont un json 
+// intercepte tous les requetes qui ont un json */
 app.use(express.json()); 
 
 app.use(cors())
@@ -56,20 +61,22 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
   next();  
 }); 
+//app.use(express.urlencoded({extended: true})); 
 
+//app.use(express.json());
 
 // Lancement helmet
-app.use(helmet());
-app.use(helmet.frameguard({ action: 'deny' })); //Pour interdire d'inclure cette page dans une iframe
+//app.use(helmet());
+//app.use(helmet.frameguard({ action: 'deny' })); //Pour interdire d'inclure cette page dans une iframe
 
 // Lancement des routes
 
 //path accés chemin fichier image
-app.use("/images", express.static(path.join(__dirname, "images")));
+//app.use("/images", express.static(path.join(__dirname, "images")));
 
 
 
 //routes router user.js liée a l authentification
-app.use('/api/auth', userRoutes);
+//app.use('/api/auth', userRoutes);
 
 module.exports = app;
