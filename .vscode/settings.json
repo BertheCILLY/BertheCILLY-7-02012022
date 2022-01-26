@@ -1,0 +1,51 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "groupomania",
+            "database": "groupomania",
+            "username": "cilly",
+            "password": "null",
+            "connectionTimeout": 60
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "groupomania",
+            "database": "groupomania",
+            "username": "groupomania",
+            "password": "null",
+            "connectionTimeout": 60
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "groupomania",
+            "database": "groupomania",
+            "username": "groupomania",
+            "password": "0",
+            "connectionTimeout": 60
+        }
+    ]
+  
+    
+
+
+    
+}

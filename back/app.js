@@ -27,9 +27,9 @@ const app = express();
 
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : ''
+  host     : 'localhost ',
+  user     : 'groupomania',
+  password : 'linux'
 });
  
 connection.connect(function(err) {
