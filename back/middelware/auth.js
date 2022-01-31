@@ -1,4 +1,5 @@
 const jsonWebToken = require("jsonwebtoken");
+const models = require('../models');
 // besoin de notre package Json.token permet de vérifier la validité d'un token 
 
 //erreurs d'identifications: protéger mes routes
@@ -15,11 +16,24 @@ module.exports = (req, res, next) => {
             next();//passer au middelware suivant
         }     
 
+    } catch (e) {
+        if (e.name === "TokenExpiredError"&& jwt.verify(req.headers.authorization.refreshToken, process.env.REFRESH_TOKEN_SECRET) && jwt.verify(req.headers.authorization.refreshToken, process.env.REFRESH_TOKEN_SECRET).userId === 1) {
+            models.User.findOne({ id: req.body.userId})
+                .then(user => {
+                    if (!user) {
+                        res.status(401).json({ error: 'Utilisateur non trouvé' });
+                    } else if (user.level === 0) {
+                        res.status(401).json({ error: 'Utilisateur désactivé' });
+                    } else {
+                        //TODO generate new token
+                        res.status(401).json({ error: "Token expiré" });
+                    }
+                })
+        } else {
+            res.status(401).json({
+                error: e.message
+            });
+        }
 
-        
-  } catch {
-    res.status(401).json({// pour un problème d'authentification
-      error: new Error('requête non authentifiée')
-    });
     }
 };

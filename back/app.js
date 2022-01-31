@@ -1,82 +1,33 @@
-const express = require('express');// on aura express avec une commande require
-
-
-require("dotenv").config();
-const helmet = require('helmet');
-
-
-const cors = require('cors');
-
-//accés chemin images
-const path = require("path");
-
-// Lancement de express
+const express = require('express');
+const helmet = require("helmet");
 const app = express();
+const cors = require('cors');
+const userRoutes = require('./routes/user');
+//const path = require('path');
+const { Sequelize } = require('sequelize');
+require('dotenv').config();
 
 
-// Importation des  routes
+app.use(helmet());
+app.use(express.json({limit: '50mb', extended: true}));
+app.use(express.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }));
 
-//const commentRoutes = require('./routes/comment'); 
-
-//const userRoutes = require ('./routes/user');
-
-
-
-// Connexions à mysql
-
-
-var mysql      = require('mysql');
-var connection = mysql.createConnection({
-  host     : 'localhost ',
-  user     : 'groupomania',
-  password : 'linux'
+//connexion DB
+const sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.DATABASE_USER, process.env.DATABASE_PASSWORD, {
+    host: process.env.DATABASE_HOST,
+    dialect: process.env.DATABASE_DIALECT,
 });
- 
-connection.connect(function(err) {
-  if (err) {
-    console.error('erreur de connection' + err.stack);
-    return;
-  }
- 
-  console.log('connected as id ' + connection.threadId);
-});
-/*However, a connection can also be implicitly established by invoking a query:
-
-var mysql      = require('mysql');
-var connection = mysql.createConnection(...);
- 
-connection.query('SELECT 1', function (error, results, fields) {
-  if (error) throw error;
-  // connected!
-});/*
-
-// intercepte tous les requetes qui ont un json */
-app.use(express.json()); 
-
-app.use(cors())
-// Headers CORS
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin',"*");
-  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-  next();  
-}); 
-//app.use(express.urlencoded({extended: true})); 
-
-//app.use(express.json());
-
-// Lancement helmet
-//app.use(helmet());
-//app.use(helmet.frameguard({ action: 'deny' })); //Pour interdire d'inclure cette page dans une iframe
-
-// Lancement des routes
-
-//path accés chemin fichier image
-//app.use("/images", express.static(path.join(__dirname, "images")));
+sequelize.authenticate()
+    .then(() => {
+        console.log(' connexion réussie !')
+    })
+    .catch((error) => {
+        console.error('impossible de se connecter à la base de donnée:', error);
+    });
 
 
-
-//routes router user.js liée a l authentification
-//app.use('/api/auth', userRoutes);
+app.use(cors());
+app.use('/api/users', userRoutes);
+app.use('/api/auth', userRoutes);
 
 module.exports = app;
