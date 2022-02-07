@@ -10,12 +10,12 @@ const {
 
 let schema = new passwordValidator(); //Shema MDP 
 schema
-  .is().min(2) // min 5 caractères
+  .is().min(2) // min 2 caractères
   .is().max(20) //max 20caractères
-  .has().uppercase() // min 1 maj
-  .has().lowercase() // min 1 minuscule
-  .has().digits() // min 1 chiffre
-  .has().not().spaces() // sans espace
+  .has().uppercase(1) // min 1 maj
+  .has().lowercase(1) // min 1 minuscule
+  .has().digits(1) // min 1 chiffre
+  .has().not().spaces(0) // sans espace
   .is().not().oneOf(['Passw0rd', 'Password123']);
 
 

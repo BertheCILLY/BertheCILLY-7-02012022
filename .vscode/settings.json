@@ -10,8 +10,8 @@
             "driver": "MySQL",
             "name": "groupomania",
             "database": "groupomania",
-            "username": "cilly",
-            "password": "null",
+            "username": "root",
+            "password": "linux",
             "connectionTimeout": 60
         },
         {
@@ -24,8 +24,8 @@
             "driver": "MySQL",
             "name": "groupomania",
             "database": "groupomania",
-            "username": "groupomania",
-            "password": "null",
+            "username": "root",
+            "password": "linux",
             "connectionTimeout": 60
         },
         {
@@ -38,8 +38,8 @@
             "driver": "MySQL",
             "name": "groupomania",
             "database": "groupomania",
-            "username": "groupomania",
-            "password": "0",
+            "username": "root",
+            "password": "linux",
             "connectionTimeout": 60
         }
     ]
