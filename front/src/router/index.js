@@ -1,39 +1,53 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 
-Vue.use(VueRouter)
+import Home from '../views/Home';
+
+
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
   },
+ 
   {
-    path: '/about',
-    name: 'About',
-    component: () => import('../views/About.vue')
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: () => import('../views/Login.vue')
-  },
-  {
-    path: '/signup',
-    name: 'Signup',
-    component: () => import('../views/Signup.vue')
+    path: '/tchat',
+    name: 'Tchat',
+    component:() => import ('../views/Tchat.vue'),
+    meta: {
+      requireAuth: true,
+    },
+    props:true
   },
   {
     path: '/profil',
     name: 'Profil',
-    component: () => import('../views/Profil.vue')
+    component:() => import ('../views/Profil.vue')
   }
-]
+];
 
-const router = new VueRouter({
+
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
   routes
 })
 
-export default router;
+
+// router.beforeEach((to, from, next) => {
+//   if (to.matched.some((route) => route.meta.requireAuth)) {
+//     if (localStorage.getItem('User')) {
+
+//       axios.get('...', data{
+//         token:l
+//       })
+//       next()
+//     } else {
+//       next('/')
+//     }
+//   } else {
+//     next()
+//   }
+// })
+
+
+export default router

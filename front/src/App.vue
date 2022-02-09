@@ -1,27 +1,14 @@
 <template>
   <div id="app">
-    <header id="nav">
-      <router-link to="/">Accueil</router-link> |
-      <router-link to="/about">A propos</router-link> |
-      <router-link to="/login">Se connecter</router-link> |
-      <router-link to="/signup">S'inscrire</router-link> |
-      <router-link to="/profil">Mon compte</router-link>
-    </header>
+    <div id="nav">
+     <!--  <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link> -->
+    </div>
     <router-view/>
-    <footer>
-      <p id="copyright">copyright Groupomania ©</p>
-    </footer>
   </div>
 </template>
 
-<style lang="scss">
-body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100vh;
-}
-
+<style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -30,29 +17,17 @@ body {
   color: #2c3e50;
 }
 
-#nav {
+/* #nav {
   padding: 30px;
+} */
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #132542;
-    }
-  }
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
 }
 
-footer{
-  background:#132542;
-  position:absolute;
-  bottom:0;
-  width:100%;
-  padding-top:50px;
-  height:50px;
-}
-
-#copyright{
-  color: white,
+#nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>
+
