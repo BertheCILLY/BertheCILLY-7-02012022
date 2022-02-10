@@ -5,4 +5,5 @@ Vue.config.productionTip = false
 
 new Vue({
   render: h => h(App),
-}).$mount('#app')
+}).$mount('#app')//c'est sur cette scop que va être monté tout notre projet 
+
