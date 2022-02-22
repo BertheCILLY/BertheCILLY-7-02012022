@@ -42,7 +42,9 @@
             "password": "linux",
             "connectionTimeout": 60
         }
-    ]
+    ],
+    "git.ignoreLimitWarning": true
+    
   
     
 
